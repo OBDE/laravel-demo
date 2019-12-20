@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\Schema;
 
 Route::get('test', function () {
     return response()->json([
+        'version' => '1.0.1',
         'APP_NAME' => env('APP_NAME'),
         'HOSTNAME' => gethostname(),
         'DB_CONNECTION' => env('DB_CONNECTION'),
         'DB_HOST' => env('DB_HOST'),
         'DB_PORT' => env('DB_PORT'),
         'DB_DATABASE' => env('DB_DATABASE'),
-        'DB_USERNAME' => env('DB_USERNAME')
+        'DB_USERNAME' => env('DB_USERNAME'),
+        'DB_PASSWORD' => env('DB_PASSWORD'),
     ]);
 });
 
