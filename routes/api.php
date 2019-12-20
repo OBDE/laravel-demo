@@ -7,6 +7,17 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 Route::get('demo', function () {
+
+    $users = null;
+
+    try{
+        $users = User::all();
+    }
+    catch(Exception $e)
+    {
+        $users = null;
+    }
+
     return response()->json([        
         'version' => '1.0.1',
         'APP_NAME' => env('APP_NAME'),
@@ -17,7 +28,7 @@ Route::get('demo', function () {
         'DB_DATABASE' => env('DB_DATABASE'),
         'DB_USERNAME' => env('DB_USERNAME'),
         'DB_PASSWORD' => env('DB_PASSWORD'),
-        'users' => User::all()
+        'users' => $users
     ]);
 });
 
