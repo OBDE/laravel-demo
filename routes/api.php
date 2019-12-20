@@ -44,6 +44,6 @@ Route::get('initdatabase',function() {
     $success = true;
     
     // Laravel would throw error if something happens upper
-    return response()->json(['success' => $success])
+    return response()->json(['success' => $success]);
 });
 
