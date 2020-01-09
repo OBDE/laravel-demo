@@ -5,20 +5,19 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 Route::get('demo', function () {
 
     $users = null;
 
-    try{
+    try {
         $users = User::all();
-    }
-    catch(Exception $e)
-    {
+    } catch (Exception $e) {
         $users = null;
     }
 
-    return response()->json([        
+    return response()->json([
         'version' => '1.0.1',
         'APP_NAME' => env('APP_NAME'),
         'HOSTNAME' => gethostname(),
@@ -32,9 +31,9 @@ Route::get('demo', function () {
     ]);
 });
 
-Route::prefix('v1')->group(function(){
-    Route::get('demo', function() {
-        return response()->json([        
+Route::prefix('v1')->group(function () {
+    Route::get('demo', function () {
+        return response()->json([
             'version' => '1.0.2',
             'APP_NAME' => env('APP_NAME'),
             'HOSTNAME' => gethostname(),
@@ -49,9 +48,9 @@ Route::prefix('v1')->group(function(){
     });
 });
 
-Route::prefix('v2')->group(function(){
-    Route::get('demo', function() {
-        return response()->json([        
+Route::prefix('v2')->group(function () {
+    Route::get('demo', function () {
+        return response()->json([
             'version' => '2.0.0',
             'APP_NAME' => env('APP_NAME'),
             'HOSTNAME' => gethostname(),
@@ -64,9 +63,21 @@ Route::prefix('v2')->group(function(){
             'version' => 'v2'
         ]);
     });
+    Route::get('sqrt/{number}', function ($number) {
+        return response()->json(['number' => $number, 'sqrt' => sqrt($number)]);
+    });
+    Route::get('cpu/{round}', function ($round) {
+
+        for($i = 0; $i <= $round; $i++)
+        {
+            Str::random(1000);
+        }
+
+        return response()->json(['data' => true]);
+    });
 });
 
-Route::get('init',function() {
+Route::get('init', function () {
 
     $success = false;
     if (!Schema::hasTable('users')) {
@@ -80,15 +91,14 @@ Route::get('init',function() {
             $table->timestamps();
         });
     }
-    
+
     User::firstOrCreate([
         'name' => 'DemoUser',
         'email' => 'demo@demo.com',
         'password' => Hash::make('demo')
     ]);
     $success = true;
-    
+
     // Laravel would throw error if something happens upper
     return response()->json(['success' => $success]);
 });
-
