@@ -32,6 +32,40 @@ Route::get('demo', function () {
     ]);
 });
 
+Route::prefix('v1')->group(function(){
+    Route::get('demo', function() {
+        return response()->json([        
+            'version' => '1.0.2',
+            'APP_NAME' => env('APP_NAME'),
+            'HOSTNAME' => gethostname(),
+            'DB_CONNECTION' => env('DB_CONNECTION'),
+            'DB_HOST' => env('DB_HOST'),
+            'DB_PORT' => env('DB_PORT'),
+            'DB_DATABASE' => env('DB_DATABASE'),
+            'DB_USERNAME' => env('DB_USERNAME'),
+            'DB_PASSWORD' => env('DB_PASSWORD'),
+            'version' => 'v1'
+        ]);
+    })
+});
+
+Route::prefix('v2')->group(function(){
+    Route::get('demo', function() {
+        return response()->json([        
+            'version' => '2.0.0',
+            'APP_NAME' => env('APP_NAME'),
+            'HOSTNAME' => gethostname(),
+            'DB_CONNECTION' => env('DB_CONNECTION'),
+            'DB_HOST' => env('DB_HOST'),
+            'DB_PORT' => env('DB_PORT'),
+            'DB_DATABASE' => env('DB_DATABASE'),
+            'DB_USERNAME' => env('DB_USERNAME'),
+            'DB_PASSWORD' => env('DB_PASSWORD'),
+            'version' => 'v2'
+        ]);
+    })
+});
+
 Route::get('init',function() {
 
     $success = false;
