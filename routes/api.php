@@ -68,12 +68,12 @@ Route::prefix('v2')->group(function () {
     });
     Route::get('cpu/{round}', function ($round) {
 
-        for($i = 0; $i <= $round; $i++)
-        {
-            Str::random(1000);
+        $data = array();
+        for ($i = 0; $i <= $round; $i++) {
+            array_push($data, Str::random(1000));
         }
 
-        return response()->json(['data' => true]);
+        return response()->json(['data' => $data]);
     });
 });
 
