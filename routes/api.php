@@ -64,7 +64,7 @@ Route::prefix('v2')->group(function () {
         ]);
     });
     Route::get('sqrt/{number}', function ($number) {
-        $x = 0.0001;
+        $x = rand();
         for ($i = 0; $i <= $number; $i++) {
           $x += sqrt($x);
         }
