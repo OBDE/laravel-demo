@@ -46,7 +46,7 @@ Route::prefix('v1')->group(function(){
             'DB_PASSWORD' => env('DB_PASSWORD'),
             'version' => 'v1'
         ]);
-    })
+    });
 });
 
 Route::prefix('v2')->group(function(){
@@ -63,7 +63,7 @@ Route::prefix('v2')->group(function(){
             'DB_PASSWORD' => env('DB_PASSWORD'),
             'version' => 'v2'
         ]);
-    })
+    });
 });
 
 Route::get('init',function() {
