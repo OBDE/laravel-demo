@@ -64,7 +64,11 @@ Route::prefix('v2')->group(function () {
         ]);
     });
     Route::get('sqrt/{number}', function ($number) {
-        return response()->json(['number' => $number, 'sqrt' => sqrt($number)]);
+        $x = 0.0001;
+        for ($i = 0; $i <= $number; $i++) {
+          $x += sqrt($x);
+        }
+        return response()->json(['number' => $number, 'sqrt' => $x]);
     });
     Route::get('cpu/{round}', function ($round) {
 
