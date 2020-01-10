@@ -68,7 +68,11 @@ Route::prefix('v2')->group(function () {
         for ($i = 0; $i <= $number; $i++) {
           $x += sqrt($x);
         }
-        return response()->json(['number' => $number, 'sqrt' => $x]);
+        return response()->json([
+            'hostname' => gethostname(),
+            'number' => $number,
+            'sqrt' => $x
+        ]);
     });
     Route::get('cpu/{round}', function ($round) {
 
@@ -77,7 +81,10 @@ Route::prefix('v2')->group(function () {
             array_push($data, Str::random(1000));
         }
 
-        return response()->json(['data' => $data]);
+        return response()->json([
+            'hostname' => gethostname(),
+            'data' => $data
+        ]);
     });
 });
 
